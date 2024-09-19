@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        {% block content %}
+            <section id="create" class="py-5">
+                <div class="container-md">
+                    <h2>Create a blog post</h2>
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.as_p}}
+                                <!--
+                                <input type="text" class="form-control" name="title" placeholder="Title"><br>
+                                <input type="text" class="form-control" name="description" placeholder="Description"><br>
+                                <input type="text" class="form-control" name="url" placeholder="GitHub Url"><br>
+                                <input type="submit" class="btn btn-dark" value="Create Post">
+                                -->
+                                <button type="submit" class="btn btn-warning">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endblock %}
+    </body>
+</html>

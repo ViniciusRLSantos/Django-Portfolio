@@ -1,0 +1,18 @@
+
+{% extends "blog/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        {% block content %}
+            <div class="container">
+                <h1>{{ post.title }}</h1><br>
+                <p>{{ post.description }}</p>
+                <p>
+                    <a href="{{ post.url }}">View Repository</a>
+                </p>
+                <br>
+                <p>{{ post.date_posted }}</p>
+            </div>            
+        {% endblock %}
+    </body>
+</html>

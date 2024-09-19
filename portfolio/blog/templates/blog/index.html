@@ -1,0 +1,85 @@
+
+{% extends "blog/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        {% block content %}
+            <!-- About Section -->
+            <section id="about" class="py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h2>About Me</h2>
+                            <p>I'm a programmer and make games as a hobby. That's about it.</p>
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- Add an image of yourself -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Section -->
+            <section id="portfolio" class="py-5">
+                <div class="container">
+                    <h2 class="text-center">Some projects I made</h2>
+                    {% if request.user.is_superuser %}
+                    <a class="btn btn-success" href="/create/">Create Post</a>
+                    {% endif %}
+                    <div class="row">
+                        <!-- Example Portfolio Item 1 -->
+                        {% for post in posts %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="{{ post.image.url }}" alt="Project 1" class="card-img">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ post.title }}</h5>
+                                    <p class="card-text">{{ post.description }}</p>
+                                    <a href="/post/{{ post.id }}" class="btn btn-primary">View Project</a>
+                                    {% if request.user.is_superuser %}
+                                    <a class="btn btn-warning" name="update" href="/update/{{ post.id}}">Update</a>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger" name="delete" value="{{ post.id}}">Delete</button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact-bg py-5">
+                <div class="container">
+                    <h2 class="text-center">Contact Me</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary form-group">Submit</button>
+                            </form>
+                        </div>
+                        <div class="col-lg-6">
+                            <address>
+                                <strong>Contact Information:</strong><br>
+                                Email: <a href="mailto:viniciusrlsantos@gmail.com">viniciusrlsantos@gmail.com</a><br>
+                                Phone: +55 (82) 9 9840-9498<br>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endblock %}
+    </body>
+</html>
